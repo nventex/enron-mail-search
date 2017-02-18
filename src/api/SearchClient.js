@@ -21,7 +21,7 @@ class SearchClient {
 
     static search(query, pageNumber = 1) {
 
-        const api = restful("https://enron-mail-proxy.herokuapp.com/api/search", fetchBackend(fetch));
+        const api = restful("https://localhost/api/search", fetchBackend(fetch));
         
         template.query.match.body = query;
         template.from = pageNumber - 1;
