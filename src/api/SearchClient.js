@@ -21,7 +21,7 @@ class SearchClient {
 
     static search(query, pageNumber = 1) {
 
-        const api = restful("https://localhost:9200/enron_emails/_search", fetchBackend(fetch));
+        const api = restful("http://192.168.0.194:9200/enron_emails/_search", fetchBackend(fetch));
         
         template.query.match.body = query;
         template.from = pageNumber - 1;
