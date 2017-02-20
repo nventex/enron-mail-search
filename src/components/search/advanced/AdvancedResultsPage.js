@@ -1,17 +1,36 @@
 import React from "react";
 import { connect } from "react-redux";
+import ResultList from "../ResultList";
 
 class AdvancedResultsPage extends React.Component {
     constructor(props, context) {
         super(props, context);
+
+        this.state = {
+            pageNumber: 1
+        };
+    }
+
+    onPaginateClick() {
+
     }
 
     render() {
         return (
-            <div/>
+            <div>
+                <ResultList
+                    results={this.props.searchState.hits.hits}
+                    onPaginateClick={this.onPaginateClick}
+                    pageNumber={this.state.pageNumber}
+                    totalCount={this.props.searchState.hits.total || 0} />                
+            </div>
         );
     }
 }
+
+AdvancedResultsPage.propTypes =  {
+    searchState: React.PropTypes.object.isRequired
+};
 
 // The object returned from the reducer is stored in the state argument and then maps to this.props...
 function mapStateToProps(state, ownProps) {

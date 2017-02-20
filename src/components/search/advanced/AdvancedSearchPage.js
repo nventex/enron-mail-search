@@ -56,6 +56,10 @@ class AdvancedSearchPage extends React.Component {
     }
 }
 
+AdvancedSearchPage.propTypes = {
+    actions: React.PropTypes.object.isRequired
+};
+
 //Pull in the React Router context so router is available on this.context.router.
 AdvancedSearchPage.contextTypes = {
     router: React.PropTypes.object
