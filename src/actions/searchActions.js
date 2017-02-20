@@ -1,5 +1,4 @@
 import * as types from "./actionTypes";
-import searchResultsApi from "../api/mockSearchResultsApi";
 import searchClient from "../api/SearchClient";
 
 let actionId = 0;

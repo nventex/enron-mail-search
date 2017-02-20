@@ -49,7 +49,7 @@ class SearchPage extends React.Component {
     onQueryChange(event) {
         let state = Object.assign({}, this.state);
         state.query = event.target.value;
-        return this.setState(state);
+        this.setState(state);
     }
 
     onSearchClick(event) {

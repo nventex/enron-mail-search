@@ -22,11 +22,7 @@ module.exports = {
         new CopyWebpackPlugin([
             { from: "./index.html", to: "./index.html" },
             { from: "./assets/**/*" }
-        ]),
-        new webpack.DefinePlugin({
-            NODE_ENV: JSON.stringify("production")
-        }),
-        new webpack.optimize.UglifyJsPlugin()
+        ])
     ],    
     module: {
         preLoaders: [

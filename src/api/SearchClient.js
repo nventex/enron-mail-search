@@ -34,6 +34,10 @@ class SearchClient {
             throw(error);
         });
     }
+
+    static advancedSearch(criteria) {
+        debugger;
+    }
 }
 
 export default SearchClient;
