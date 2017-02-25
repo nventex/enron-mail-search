@@ -35,6 +35,14 @@ class SearchClient {
 
         const api = restful("http://192.168.0.194:9200/enron_emails/_search/template", fetchBackend(fetch));
 
+        if (criteria.body_terms) {
+            criteria.body_terms = criteria.body_terms.split(" ");
+        }
+
+        if (criteria.subject_terms) {
+            criteria.subject_terms = criteria.subject_terms.split(" ");
+        }
+
         advancedTemplate.params = criteria;
 
         return api.post(advancedTemplate)

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import ResultList from "../ResultList";
+import AdvancedResultList from "./AdvancedResultList";
 
 class AdvancedResultsPage extends React.Component {
     constructor(props, context) {
@@ -18,11 +18,9 @@ class AdvancedResultsPage extends React.Component {
     render() {
         return (
             <div>
-                <ResultList
-                    results={this.props.searchState.hits.hits}
-                    onPaginateClick={this.onPaginateClick}
-                    pageNumber={this.state.pageNumber}
-                    totalCount={this.props.searchState.hits.total || 0} />                
+                <AdvancedResultList
+                    hits={this.props.searchState.hits}
+                />                
             </div>
         );
     }
