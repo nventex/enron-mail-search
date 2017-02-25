@@ -1,42 +1,49 @@
-import restful , { fetchBackend } from "restful.js";
+import restful, { fetchBackend } from "restful.js";
 
 const template = {
-    "_source": ["to", "from", "subject", "date"],
-    "from": 0,
-    "size": 15,
-    "query": {
-        "match": { "body": "migrate" }
-    },
-    "highlight": {
-        "fields": {
-            "body": {
-                "fragment_size": 75,
-                "number_of_fragments": 3
-            }
-        }
+	"file": "enron_searchTemplate",
+    "params": {
+        "query": "",
+        "from": 0
     }
+};
+
+const advancedTemplate = {
+	"file": "enron_advancedTemplate",
+    "params": {}
 };
 
 class SearchClient {
 
     static search(query, pageNumber = 1) {
 
-        const api = restful("http://192.168.0.194:9200/enron_emails/_search", fetchBackend(fetch));
-        
-        template.query.match.body = query;
-        template.from = pageNumber - 1;
+        const api = restful("http://192.168.0.194:9200/enron_emails/_search/template", fetchBackend(fetch));
+
+        template.params.query = query;
+        template.params.from = pageNumber - 1;
 
         return api.post(template)
-        .then((response) => {
-            return response.body().data();
-        })
-        .catch(error => {
-            throw(error);
-        });
+            .then((response) => {
+                return response.body().data();
+            })
+            .catch(error => {
+                throw (error);
+            });
     }
 
     static advancedSearch(criteria) {
-        debugger;
+
+        const api = restful("http://192.168.0.194:9200/enron_emails/_search/template", fetchBackend(fetch));
+
+        advancedTemplate.params = criteria;
+
+        return api.post(advancedTemplate)
+            .then((response) => {
+                return response.body().data();
+            })
+            .catch(error => {
+                throw (error);
+            });
     }
 }
 

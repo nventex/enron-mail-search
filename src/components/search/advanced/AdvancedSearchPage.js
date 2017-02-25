@@ -2,9 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as advancedSearchActions from "../../../actions/advancedSearchActions";
-import TextField from "material-ui/TextField";
-import { Grid, Row, Col } from "react-flexbox-grid";
-import RaisedButton from "material-ui/RaisedButton";
+import AdvancedSearchFrom from "./AdvancedSearchForm";
 
 // Container component...
 
@@ -13,13 +11,22 @@ class AdvancedSearchPage extends React.Component {
         super(props, context);
 
         this.state = {
-            criteria: {
-                query: ""
+            criteria: { 
+                body_match: "", body_terms: "", body_phrase: "",
+                subject_match: "", subject_terms: "", subject_phrase: "",
+                from_filter: "", to_filter: "", startDate: null, endDate: null
             }
         };
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSearchClick = this.onSearchClick.bind(this);
+        this.onDateChange = this.onDateChange.bind(this);
+    }
+
+    onDateChange(id, date) {
+        let state = Object.assign({}, this.state);
+        state.criteria[id] = date;
+        this.setState(state);
     }
 
     onTextChange(event) {
@@ -35,23 +42,12 @@ class AdvancedSearchPage extends React.Component {
 
     render() {
         return (
-            <Grid>
-                <Row>
-                    <Col>
-                        <TextField 
-                            id="query"
-                            value={this.state.criteria.query}
-                            onChange={this.onTextChange}/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <RaisedButton
-                            label="Search"
-                            onClick={this.onSearchClick} />
-                    </Col>
-                </Row>
-            </Grid>
+            <AdvancedSearchFrom
+                onTextChange={this.onTextChange}
+                onSearchClick={this.onSearchClick}
+                criteria={this.state.criteria}
+                onDateChange={this.onDateChange}
+                />
         );
     }
 }
