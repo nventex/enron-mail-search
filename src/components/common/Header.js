@@ -1,5 +1,5 @@
 import React, {PropTypes} from "react";
-import {Link, IndexLink} from "react-router";
+import {Link } from "react-router";
 import AppBar from "material-ui/AppBar";
 import FlatButton from "material-ui/FlatButton";
 

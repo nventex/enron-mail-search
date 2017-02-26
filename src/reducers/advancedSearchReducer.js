@@ -8,6 +8,9 @@ export default function advancedSearchReducer(state, action) {
 
 function handleAction(action) {
     switch (action.type) {
+        case types.READ_MAIL_SUCCESS:
+            return action.mail.results;
+
         case types.GET_ADVANCED_RESULTS_SUCCESS:
             return action.results;
         

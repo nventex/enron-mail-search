@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as searchActions from "../../actions/searchActions";
+import * as readActions from "../../actions/readActions";
 import SearchForm from "./SearchForm";
 import ResultList from "./ResultList";
 
@@ -21,6 +22,7 @@ class SearchPage extends React.Component {
         this.onQueryChange = this.onQueryChange.bind(this);
         this.onSearchClick = this.onSearchClick.bind(this);
         this.onPaginateClick = this.onPaginateClick.bind(this);
+        this.onReadMailClick = this.onReadMailClick.bind(this);
         this.onBrowserButtonNavigation = this.onBrowserButtonNavigation.bind(this);
     }
 
@@ -65,6 +67,12 @@ class SearchPage extends React.Component {
         this.beginSearch(query, pageNumber);
     }
 
+    onReadMailClick(id) {
+        this.props.readActions.readMail(id).then(response => {
+            this.context.router.push(`/mail/${id}`);    
+        });
+    }
+
     beginSearch(query, pageNumber) {
         this.toggleRefreshIndicator("loading");
         const searchPromise = (query) ? this.props.actions.search(query, pageNumber) : this.props.actions.getDefaultResults();
@@ -95,6 +103,7 @@ class SearchPage extends React.Component {
                     onSearchClick={this.onSearchClick}
                     indicatorStatus={this.state.indicatorStatus} />
                 <ResultList
+                    onReadMailClick={this.onReadMailClick}
                     results={this.props.searchState.hits.hits}
                     onPaginateClick={this.onPaginateClick}
                     pageNumber={this.state.pageNumber}
@@ -106,6 +115,7 @@ class SearchPage extends React.Component {
 
 SearchPage.propTypes = {
     actions: React.PropTypes.object.isRequired,
+    readActions: React.PropTypes.object.isRequired,
     params: React.PropTypes.object.isRequired,
     searchState: React.PropTypes.object.isRequired
 };
@@ -126,7 +136,8 @@ function mapStateToProps(state, ownProps) {
 // Moves the use of dispatch to this function and centralizes all dispatch calls...
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(searchActions, dispatch)
+        actions: bindActionCreators(searchActions, dispatch),
+        readActions: bindActionCreators(readActions, dispatch)
     };
 }
 

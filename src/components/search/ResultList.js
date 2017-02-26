@@ -4,9 +4,14 @@ import { Grid, Row, Col } from "react-flexbox-grid";
 import ResultItem from "./ResultItem";
 import Subheader from "material-ui/Subheader";
 
-const ResultList = ({results, onPaginateClick, pageNumber, totalCount}) => {
+const ResultList = ({results, onPaginateClick, pageNumber, totalCount, onReadMailClick}) => {
 
-    let resultRows = results.map(resultItem => (<ResultItem resultItem={resultItem} key={resultItem._id} />));
+    let resultRows = results.map(resultItem => (
+        <ResultItem 
+            onReadMailClick={onReadMailClick}
+            resultItem={resultItem} 
+            key={resultItem._id} />
+    ));
 
     let pageCount = Math.ceil(totalCount / 15);
 
@@ -48,6 +53,7 @@ const ResultList = ({results, onPaginateClick, pageNumber, totalCount}) => {
 ResultList.propTypes = {
     results: React.PropTypes.array.isRequired,
     onPaginateClick: React.PropTypes.func.isRequired,
+    onReadMailClick: React.PropTypes.func.isRequired,
     pageNumber: React.PropTypes.number.isRequired,
     totalCount: React.PropTypes.number.isRequired
 };

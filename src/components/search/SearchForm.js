@@ -3,6 +3,7 @@ import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import RefreshIndicator from "material-ui/RefreshIndicator";
+import { Link } from "react-router";
 
 const SearchForm = ({query, errors, onQueryChange, onSearchClick, indicatorStatus}) => {
     const style = {
@@ -26,6 +27,7 @@ const SearchForm = ({query, errors, onQueryChange, onSearchClick, indicatorStatu
                         <RaisedButton
                             label="Search"
                             onClick={onSearchClick} />
+                        <Link style={{fontSize: "11px", marginLeft: "7px"}} to={"/advanced/search"}>Advanced Search</Link>
                     </Col>
                 </Row>
                 <Row center="lg">

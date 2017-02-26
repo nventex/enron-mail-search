@@ -15,6 +15,18 @@ const advancedTemplate = {
 
 class SearchClient {
 
+    static readMail(id) {
+        const api = restful(`http://192.168.0.194:9200/enron_emails/email/${id}`, fetchBackend(fetch));
+
+        return api.get()
+            .then((response) => {
+                return response.body().data();
+            })
+            .catch(error => {
+                throw (error);
+            });
+    }
+    
     static search(query, pageNumber = 1) {
 
         const api = restful("http://192.168.0.194:9200/enron_emails/_search/template", fetchBackend(fetch));

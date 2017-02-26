@@ -27,6 +27,7 @@
     "compression": "^1.6.2",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
+    "dateformat": "^2.0.0",
     "eslint": "^3.14.0",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-import": "^2.2.0",

@@ -7,6 +7,7 @@ import AboutPage from "./components/about/AboutPage";
 import SearchPage from "./components/search/SearchPage";
 import AdvancedSearchPage from "./components/search/advanced/AdvancedSearchPage";
 import AdvancedResultsPage from "./components/search/advanced/AdvancedResultsPage";
+import ReadMailPage from "./components/readMail/ReadMailPage";
 
 export default (
     <Route path="/" component={App}>
@@ -17,5 +18,6 @@ export default (
         <Route path="search/:query/:pageNumber" component={SearchPage} />
         <Route path="advanced/search" component={AdvancedSearchPage} />
         <Route path="advanced/search/:pageNumber" component={AdvancedResultsPage} />
+        <Route path="mail/:id" component={ReadMailPage} />
     </Route>
 );

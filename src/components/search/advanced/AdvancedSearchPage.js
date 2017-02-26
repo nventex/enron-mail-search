@@ -49,9 +49,8 @@ class AdvancedSearchPage extends React.Component {
 
     onSearchClick() {
         this.toggleRefreshIndicator("loading");
-        let resp = this.props.actions.search(this.state.criteria);
 
-        resp.then(response => {
+        this.props.actions.search(this.state.criteria).then(response => {
             this.toggleRefreshIndicator("hide");
             this.context.router.push(`/advanced/search/1`);
         });
