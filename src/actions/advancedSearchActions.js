@@ -2,10 +2,11 @@ import * as types from "./actionTypes";
 import searchClient from "../api/SearchClient";
 
 // Called from a React component and returns a type for any reducer that cares about it...
-export function search(criteria) {
+export function search(searchCriteria) {
     return function(dispatch, getState) {
-        return searchClient.advancedSearch(criteria).then(response => {
-            dispatch(getResultsSuccess({ hits: response.hits }));
+        return searchClient.advancedSearch(searchCriteria).then(response => {
+            let criteria = Object.assign({}, searchCriteria);
+            dispatch(getResultsSuccess({ hits: response.hits, searchCriteria: criteria }));
         }).catch(error => {
             throw(error);
         });

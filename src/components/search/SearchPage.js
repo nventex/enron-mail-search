@@ -82,7 +82,7 @@ class SearchPage extends React.Component {
     toggleRefreshIndicator(status) {
         let state = Object.assign({}, this.state);
         state.indicatorStatus = status;
-        return this.setState(state);
+        this.setState(state);
     }
 
     render() {

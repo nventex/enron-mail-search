@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as advancedSearchActions from "../../../actions/advancedSearchActions";
-import AdvancedSearchFrom from "./AdvancedSearchForm";
+import AdvancedSearchForm from "./AdvancedSearchForm";
 
 // Container component...
 
@@ -10,18 +10,30 @@ class AdvancedSearchPage extends React.Component {
     constructor(props, context) {
         super(props, context);
 
+        let defaultCriteria = {
+            body_match: "", body_terms: "", body_phrase: "",
+            subject_match: "", subject_terms: "", subject_phrase: "",
+            from_filter: "", to_filter: "", startDate: null, endDate: null
+        };
+
+        if (this.props.searchState.searchCriteria) {
+            defaultCriteria = Object.assign({}, this.props.searchState.searchCriteria);
+        }
+
         this.state = {
-            criteria: { 
-                body_match: "", body_terms: "", body_phrase: "",
-                subject_match: "", subject_terms: "", subject_phrase: "",
-                from_filter: "", to_filter: "", startDate: null, endDate: null
-            }
+            indicatorStatus: "hide",
+            criteria: defaultCriteria
         };
 
         this.onTextChange = this.onTextChange.bind(this);
         this.onSearchClick = this.onSearchClick.bind(this);
         this.onDateChange = this.onDateChange.bind(this);
     }
+
+    componentWillReceiveProps(nextProps) {
+        let state = Object.assign({}, this.props.searchState);
+        this.setState(state);
+    }    
 
     onDateChange(id, date) {
         let state = Object.assign({}, this.state);
@@ -36,24 +48,37 @@ class AdvancedSearchPage extends React.Component {
     }
 
     onSearchClick() {
-        this.props.actions.search(this.state.criteria);
-        this.context.router.push(`/advanced/search/1`);
+        this.toggleRefreshIndicator("loading");
+        let resp = this.props.actions.search(this.state.criteria);
+
+        resp.then(response => {
+            this.toggleRefreshIndicator("hide");
+            this.context.router.push(`/advanced/search/1`);
+        });
+    }
+
+    toggleRefreshIndicator(status) {
+        let state = Object.assign({}, this.state);
+        state.indicatorStatus = status;
+        this.setState(state);
     }
 
     render() {
         return (
-            <AdvancedSearchFrom
+            <AdvancedSearchForm
                 onTextChange={this.onTextChange}
                 onSearchClick={this.onSearchClick}
                 criteria={this.state.criteria}
                 onDateChange={this.onDateChange}
+                indicatorStatus={this.state.indicatorStatus}
                 />
         );
     }
 }
 
 AdvancedSearchPage.propTypes = {
-    actions: React.PropTypes.object.isRequired
+    actions: React.PropTypes.object.isRequired,
+    searchState: React.PropTypes.object.isRequired
 };
 
 //Pull in the React Router context so router is available on this.context.router.
