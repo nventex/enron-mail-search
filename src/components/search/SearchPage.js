@@ -38,7 +38,10 @@ class SearchPage extends React.Component {
     }
 
     onPageLoadAndButtonNavigation() {
-        this.beginSearch(this.props.params.query, this.props.params.pageNumber);
+        let currentLocation = this.props.router.getCurrentLocation();
+        if (currentLocation.pathname && !currentLocation.pathname.includes("advanced")) {
+            this.beginSearch(this.props.params.query, this.props.params.pageNumber);
+        }
     }
 
     setQueryUsingParams() {
@@ -127,9 +130,12 @@ SearchPage.contextTypes = {
 
 // The object returned from the reducer is stored in the state argument and then maps to this.props...
 function mapStateToProps(state, ownProps) {
+    
+    let searches = (ownProps.params.query) ? state.searches : { hits: { hits: [] } };
+    
     return {
         // "searches" name must match the reducer in rootReducer...
-        searchState: state.searches
+        searchState: searches
     };
 }
 
