@@ -45,7 +45,7 @@ class SearchClient {
 
     static advancedSearch(criteria) {
 
-        const api = restful("http://192.168.0.194:9200/enron_emails/_search/template", fetchBackend(fetch));
+        const api = restful("https://enron-mail-proxy.herokuapp.com/api/search", fetchBackend(fetch));
 
         advancedTemplate.params = Object.assign({}, criteria);
 
