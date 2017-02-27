@@ -16,7 +16,7 @@ const advancedTemplate = {
 class SearchClient {
 
     static readMail(id) {
-        const api = restful(`http://192.168.0.194:9200/enron_emails/email/${id}`, fetchBackend(fetch));
+        const api = restful(`https://enron-mail-proxy.herokuapp.com/api/email/${id}`, fetchBackend(fetch));
 
         return api.get()
             .then((response) => {
@@ -29,7 +29,7 @@ class SearchClient {
     
     static search(query, pageNumber = 1) {
 
-        const api = restful("http://192.168.0.194:9200/enron_emails/_search/template", fetchBackend(fetch));
+        const api = restful("https://enron-mail-proxy.herokuapp.com/api/search", fetchBackend(fetch));
 
         template.params.query = query;
         template.params.from = pageNumber - 1;
