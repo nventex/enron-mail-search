@@ -27,7 +27,6 @@ const SearchForm = ({query, errors, onQueryChange, onSearchClick, indicatorStatu
                         <RaisedButton
                             label="Search"
                             onClick={onSearchClick} />
-                        <Link style={{fontSize: "11px", marginLeft: "7px"}} to={"/advanced/search"}>Advanced Search</Link>
                     </Col>
                 </Row>
                 <Row center="lg">

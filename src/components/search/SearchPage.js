@@ -39,7 +39,10 @@ class SearchPage extends React.Component {
 
     onPageLoadAndButtonNavigation() {
         let currentLocation = this.props.router.getCurrentLocation();
-        if (currentLocation.pathname && !currentLocation.pathname.includes("advanced")) {
+        
+        // Should only search when the current pathname is /search/sometext
+        let regex = /search\/[a-zA-Z]+\/\d+/;
+        if (currentLocation.pathname && currentLocation.pathname.match(regex)) {
             this.beginSearch(this.props.params.query, this.props.params.pageNumber);
         }
     }
@@ -120,7 +123,8 @@ SearchPage.propTypes = {
     actions: React.PropTypes.object.isRequired,
     readActions: React.PropTypes.object.isRequired,
     params: React.PropTypes.object.isRequired,
-    searchState: React.PropTypes.object.isRequired
+    searchState: React.PropTypes.object.isRequired,
+    router: React.PropTypes.object.isRequired
 };
 
 //Pull in the React Router context so router is available on this.context.router.
