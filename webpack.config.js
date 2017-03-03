@@ -21,6 +21,7 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin([
             { from: "./index.html", to: "./index.html" },
+            { from: "./robots.txt", to: "./robots.txt" },
             { from: "./assets/**/*" }
         ])
     ],    
