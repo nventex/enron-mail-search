@@ -19,9 +19,7 @@ const Header = () => {
             title={<span style={styles.title}>Enron E-mail Search</span>}
             showMenuIconButton={false}
             onTitleTouchTap={handleTouchTap}
-            iconClassNameRight="muidocs-icon-navigation-expand-more">
-
-        </AppBar>
+            iconClassNameRight="muidocs-icon-navigation-expand-more"/>
     );
 };
 

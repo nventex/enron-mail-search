@@ -15,12 +15,10 @@ class AdvancedResultsPage extends React.Component {
         this.onReadMailClick = this.onReadMailClick.bind(this);
     }
 
-    onPaginateClick() {
-
-    }
-
     onReadMailClick(id) {
-        this.props.actions.readMail(id).then(response => {
+        let readItem = Object.assign({email_id: id}, this.props.searchState.searchCriteria);
+        
+        this.props.actions.readMail(readItem).then(response => {
             this.context.router.push(`/mail/${id}`);    
         });
     }
