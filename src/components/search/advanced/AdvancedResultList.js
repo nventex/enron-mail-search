@@ -2,6 +2,8 @@ import React from "react";
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from "material-ui/Table";
 import dateFormat from "dateformat";
 import { Link } from "react-router";
+import IconButton from "material-ui/IconButton";
+import EmailIcon from "material-ui/svg-icons/communication/email";
 
 const AdvancedResultList = ({hits, onReadMailClick}) => {
 
@@ -13,10 +15,7 @@ const AdvancedResultList = ({hits, onReadMailClick}) => {
             selectable={false}>
             <TableHeader>
                 <TableRow>
-                    <TableHeaderColumn colSpan="1" tooltip="Advanced Search">
-                        <Link style={{fontSize: "11px", marginLeft: "7px"}} to={"/advanced/search"}>Advanced Search</Link>
-                    </TableHeaderColumn>
-                    <TableHeaderColumn colSpan="3" tooltip="Total Records" style={{ textAlign: "center" }}>
+                    <TableHeaderColumn colSpan="4" tooltip="Total Records" style={{ textAlign: "center" }}>
                         {hits.total} hits
                     </TableHeaderColumn>
                 </TableRow>
@@ -32,7 +31,10 @@ const AdvancedResultList = ({hits, onReadMailClick}) => {
                 {results.map((row) => (
                 <TableRow key={row._id}>
                     <TableRowColumn>
-                        <span style={{cursor:"pointer"}} onClick={() => onReadMailClick(row._id)}>{row._source.subject}</span>
+                        <IconButton tooltip="SVG Icon" onClick={() => onReadMailClick(row._id)}>
+                            <EmailIcon />
+                        </IconButton>                     
+                        {row._source.subject}
                     </TableRowColumn>
                     <TableRowColumn>{dateFormat(row._source.date, "mm/dd/yyyy h:M TT")}</TableRowColumn>
                     <TableRowColumn>{row._source.from}</TableRowColumn>

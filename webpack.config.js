@@ -1,6 +1,5 @@
 var path = require("path");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
-var webpack = require("webpack");
 
 module.exports = {
     context: path.resolve("src"), //Find entry files in this path...
@@ -24,7 +23,7 @@ module.exports = {
             { from: "./robots.txt", to: "./robots.txt" },
             { from: "./assets/**/*" }
         ])
-    ],    
+    ],
     module: {
         preLoaders: [
             { 
