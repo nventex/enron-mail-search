@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server -d --inline",
-    "prod": "webpack -p",
+    "prod": "webpack --config webpack-production.config.js -p",
     "start": "node server.js"
   },
   "engines": {
