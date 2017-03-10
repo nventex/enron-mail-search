@@ -1,5 +1,6 @@
 var path = require("path");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
+var webpack = require("webpack");
 
 module.exports = {
     context: path.resolve("src"), //Find entry files in this path...
@@ -22,7 +23,14 @@ module.exports = {
             { from: "./index.html", to: "./index.html" },
             { from: "./robots.txt", to: "./robots.txt" },
             { from: "./assets/**/*" }
-        ])
+        ]),
+
+        // Make sure this plugin is defined last...
+        new webpack.DefinePlugin({
+            "process.env": {
+                "API_URL": JSON.stringify("http://localhost:3000/api")
+            }
+        })
     ],
     module: {
         preLoaders: [
