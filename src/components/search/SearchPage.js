@@ -74,16 +74,16 @@ class SearchPage extends React.Component {
     }
 
     onReadMailClick(id) {
-        let readItem =
+        let pushData =
         {
-            email_id: id,
-            query: this.props.params.query,
-            page_number: this.props.params.pageNumber
+            pathname: `/mail/${id}`,
+            state: {
+                query: this.props.params.query,
+                page_number: this.props.params.pageNumber
+            }
         };        
-        
-        this.props.readActions.readMail(readItem).then(response => {
-            this.context.router.push(`/mail/${id}`);
-        });
+
+        this.context.router.push(pushData);
     }
 
     beginSearch(query, pageNumber) {

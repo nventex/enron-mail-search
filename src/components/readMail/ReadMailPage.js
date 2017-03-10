@@ -13,8 +13,23 @@ class ReadMailPage extends React.Component {
         this.onBackClick = this.onBackClick.bind(this);
     }
 
+    componentDidMount() {
+        this.readMail();
+    }
+
     onBackClick() {
         this.context.router.goBack();
+    }
+
+    readMail() {
+        // TODO: toggleRefreshIndicator("loading");
+        
+        let readData = Object.assign({}, this.props.location.state);
+        readData.email_id = this.props.params.id;        
+
+        this.props.actions.readMail(readData).then(response => {
+            // TODO: toggleRefreshIndicator("hide");
+        });        
     }
 
     render() {

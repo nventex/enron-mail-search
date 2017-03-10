@@ -15,10 +15,6 @@ function handleAction(action) {
         case types.GET_RESULTS_SUCCESS:
             return action.results;
 
-        // Needs to be recycled back to the SearchPage in case user navigates back..
-        case types.READ_MAIL_SUCCESS:
-            return action.mail.searchResults;
-
         default:
             return actionResults;
     }

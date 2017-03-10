@@ -1,6 +1,6 @@
 import * as types from "../actions/actionTypes";
 
-let defaultActionResult = { mail: { _source: { body: "" } } };
+let defaultActionResult = { _source: { body: "" } };
 
 export default function readMailReducer(state, action) {
     return handleAction(action);
@@ -11,10 +11,6 @@ function handleAction(action) {
         case types.READ_MAIL_SUCCESS:
             return action.mail;
         
-        // Needs to be recycled back to the ReadMailPage in case user navigates back to it..
-        case types.GET_RESULTS_SUCCESS:
-            return action.results.mail;
-
         default:
             return defaultActionResult;
     }
