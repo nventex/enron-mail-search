@@ -88,7 +88,7 @@ class SearchPage extends React.Component {
 
     beginSearch(query, pageNumber) {
         this.toggleRefreshIndicator("loading");
-        const searchPromise = (query) ? this.props.actions.search(query, pageNumber) : this.props.actions.getDefaultResults();
+        const searchPromise = this.props.actions.search(query, pageNumber);
 
         searchPromise.then((response) => {
             this.toggleRefreshIndicator("hide");

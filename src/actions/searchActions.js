@@ -18,13 +18,3 @@ export function search(query, pageNumber) {
 export function getResultsSuccess(results = {}) {
     return { type: types.GET_RESULTS_SUCCESS, results };
 }
-
-export function getDefaultResults() {
-    return function(dispatch, getState) {
-        return new Promise((resolve, reject) => {
-            resolve({ hits: { hits: [] }});
-        }).then(response => {
-            dispatch(getResultsSuccess({ hits: response.hits }));
-        });
-    };
-}

@@ -7,10 +7,10 @@ import * as types from "../actions/actionTypes";
 let actionResults = { hits: { hits: [] } };
 
 export default function searchReducer(state, action) {
-    return trackAndCancelPreviousAction(action);
+    return handleAction(action);
 }
 
-function trackAndCancelPreviousAction(action) {
+function handleAction(action) {
     switch (action.type) {
         case types.GET_RESULTS_SUCCESS:
             return action.results;

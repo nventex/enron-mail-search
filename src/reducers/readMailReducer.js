@@ -11,6 +11,7 @@ function handleAction(action) {
         case types.READ_MAIL_SUCCESS:
             return action.mail;
         
+        // Needs to be recycled back to the ReadMailPage in case user navigates back to it..
         case types.GET_RESULTS_SUCCESS:
             return action.results.mail;
 
