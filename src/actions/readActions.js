@@ -8,7 +8,9 @@ export function readMail(readItem) {
         
         return searchClient.readMail(readItem.email_id).then(response => {
             let state = getState();
-            response.results = state.advancedSearches;
+            // Recycle the state so that the SearchPage and AdvancedSearchPage component receive the props in case user navigates back...
+            response.advancedSearchResults = state.advancedSearches;
+            response.searchResults = state.searches;
             dispatch(getReadSuccess(response));
         }).catch(error => {
             throw(error);

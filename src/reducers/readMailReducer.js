@@ -11,6 +11,9 @@ function handleAction(action) {
         case types.READ_MAIL_SUCCESS:
             return action.mail;
         
+        case types.GET_RESULTS_SUCCESS:
+            return action.results.mail;
+
         default:
             return defaultActionResult;
     }

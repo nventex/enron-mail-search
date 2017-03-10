@@ -4,7 +4,6 @@ import * as types from "../actions/actionTypes";
 
 // We can set the initial state object that will be 
 // passed down to the component's mapStateToProps function(state, xxxx) ...
-let reducerId = 0;
 let actionResults = { hits: { hits: [] } };
 
 export default function searchReducer(state, action) {
@@ -12,15 +11,15 @@ export default function searchReducer(state, action) {
 }
 
 function trackAndCancelPreviousAction(action) {
-    if (action.type === types.GET_RESULTS_SUCCESS && 
-        action.results && 
-        action.results.reducerId) {
-        if (action.results.reducerId >= reducerId) {
-            reducerId = action.results.reducerId;
-            actionResults = action.results;
-            return actionResults;
-        }
-    }
+    switch (action.type) {
+        case types.GET_RESULTS_SUCCESS:
+            return action.results;
 
-    return actionResults;
+        // Needs to be recycled back to the SearchPage in case user navigates back..
+        case types.READ_MAIL_SUCCESS:
+            return action.mail.searchResults;
+
+        default:
+            return actionResults;
+    }
 }
