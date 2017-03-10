@@ -13,8 +13,8 @@ const advancedTemplate = {
     "params": {}
 };
 
-// const apiUrl = "https://enron-mail-proxy.herokuapp.com/api";
-const apiUrl = "http://localhost:3000/api";
+const apiUrl = "https://enron-mail-proxy.herokuapp.com/api";
+// const apiUrl = "http://localhost:3000/api";
 
 class SearchClient {
 
