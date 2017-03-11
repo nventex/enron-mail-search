@@ -86,7 +86,8 @@ class ReadMailPage extends React.Component {
 ReadMailPage.propTypes = {
     actions: React.PropTypes.object.isRequired,
     params: React.PropTypes.object.isRequired,
-    readState: React.PropTypes.object.isRequired
+    readState: React.PropTypes.object.isRequired,
+    location: React.PropTypes.object.isRequired
 };
 
 ReadMailPage.contextTypes = {

@@ -12,12 +12,7 @@ class SearchPage extends React.Component {
     constructor(props, context) {
         super(props, context);
 
-        this.state = {
-            indicatorStatus: "hide",
-            errors: {},
-            query: "",
-            pageNumber: 1
-        };
+        this.state = Object.assign({}, props.searchState);
 
         this.onQueryChange = this.onQueryChange.bind(this);
         this.onSearchClick = this.onSearchClick.bind(this);
@@ -27,9 +22,10 @@ class SearchPage extends React.Component {
     }
 
     componentDidMount() {
+        // Handle cases when navigating back and forward...
         window.onpopstate = this.onBrowserButtonNavigation;
 
-        // For cases where someone bookmarked a search query...
+        // Handle cases when a search result is directly accessed (ie: bookmarked)...
         this.onPageLoadAndButtonNavigation();
     }
 
@@ -38,20 +34,19 @@ class SearchPage extends React.Component {
     }
 
     onPageLoadAndButtonNavigation() {
-        let currentLocation = this.props.router.getCurrentLocation();
-        
-        // Should only search when the current pathname is /search/sometext
-        let regex = /search\/[a-zA-Z]+\/\d+/;
-        if (currentLocation.pathname && currentLocation.pathname.match(regex)) {
-            this.beginSearch(this.props.params.query, this.props.params.pageNumber);
+        if (this.hasUriParams()) {
+            this.search(this.props.params.query, this.props.params.pageNumber);
+        }
+        else {
+             this.props.actions.getInitialState();
         }
     }
 
-    setQueryUsingParams() {
-        let state = Object.assign({}, this.state);
-        state.query = this.props.params.query || "";
-        state.pageNumber = parseInt(this.props.params.pageNumber) || 1;
-        this.setState(state);
+    hasUriParams() {
+        // Should only search when the current pathname is /search/sometext
+        let currentLocation = this.props.router.getCurrentLocation();
+        let regex = /search\/[a-zA-Z]+\/\d+/;
+        return currentLocation.pathname && currentLocation.pathname.match(regex);
     }
 
     onQueryChange(event) {
@@ -63,14 +58,41 @@ class SearchPage extends React.Component {
     onSearchClick(event) {
         event.preventDefault();
         let query = this.state.query;
-        this.beginSearch(query, 1);
+        this.search(query, 1);
     }
 
     onPaginateClick(data) {
         event.preventDefault();
         let pageNumber = data.selected + 1;
         let query = this.state.query;
-        this.beginSearch(query, pageNumber);
+        this.search(query, pageNumber);
+    }
+
+    setQueryUsingParams() {
+        let state = Object.assign({}, this.state);
+        state.query = this.props.params.query || "";
+        state.pageNumber = parseInt(this.props.params.pageNumber) || 1;
+        this.setState(state);
+    }
+
+    search(query, pageNumber) {
+        this.toggleRefreshIndicator("loading");
+        
+        const searchPromise = this.props.actions.search(query, pageNumber);
+
+        searchPromise.then((response) => {
+            this.toggleRefreshIndicator("hide");
+            
+            this.context.router.push(`/search/${query}/${pageNumber}`);
+
+            this.setQueryUsingParams();
+        });
+    }
+
+    toggleRefreshIndicator(status) {
+        let state = Object.assign({}, this.state);
+        state.indicatorStatus = status;
+        this.setState(state);
     }
 
     onReadMailClick(id) {
@@ -86,32 +108,11 @@ class SearchPage extends React.Component {
         this.context.router.push(pushData);
     }
 
-    beginSearch(query, pageNumber) {
-        this.toggleRefreshIndicator("loading");
-        const searchPromise = this.props.actions.search(query, pageNumber);
-
-        searchPromise.then((response) => {
-            this.toggleRefreshIndicator("hide");
-            
-            if (query && pageNumber) {
-                this.context.router.push(`/search/${query}/${pageNumber}`);
-            }
-            this.setQueryUsingParams();
-        });
-    }
-
-    toggleRefreshIndicator(status) {
-        let state = Object.assign({}, this.state);
-        state.indicatorStatus = status;
-        this.setState(state);
-    }
-
     render() {
         return (
             <div>
                 <SearchForm
                     query={this.state.query}
-                    errors={this.state.errors}
                     onQueryChange={this.onQueryChange}
                     onSearchClick={this.onSearchClick}
                     indicatorStatus={this.state.indicatorStatus} />
@@ -128,7 +129,6 @@ class SearchPage extends React.Component {
 
 SearchPage.propTypes = {
     actions: React.PropTypes.object.isRequired,
-    readActions: React.PropTypes.object.isRequired,
     params: React.PropTypes.object.isRequired,
     searchState: React.PropTypes.object.isRequired,
     router: React.PropTypes.object.isRequired
@@ -142,19 +142,16 @@ SearchPage.contextTypes = {
 // The object returned from the reducer is stored in the state argument and then maps to this.props...
 function mapStateToProps(state, ownProps) {
     
-    let searches = (ownProps.params.query) ? state.searches : { hits: { hits: [] } };
-    
     return {
         // "searches" name must match the reducer in rootReducer...
-        searchState: searches
+        searchState: state.searches
     };
 }
 
 // Moves the use of dispatch to this function and centralizes all dispatch calls...
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(searchActions, dispatch),
-        readActions: bindActionCreators(readActions, dispatch)
+        actions: bindActionCreators(searchActions, dispatch)
     };
 }
 

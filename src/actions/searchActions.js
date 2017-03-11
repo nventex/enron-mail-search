@@ -6,7 +6,7 @@ export function search(query, pageNumber) {
     return function(dispatch, getState) {
         return searchClient.search(query, pageNumber).then(response => {
             let state = getState();
-            dispatch(getResultsSuccess({ hits: response.hits, mail: state.readMail }));
+            dispatch(getResultsSuccess({ hits: response.hits }));
         }).catch(error => {
             throw(error);
         });
@@ -17,4 +17,8 @@ export function search(query, pageNumber) {
 // It's returning an action type and the data...
 export function getResultsSuccess(results = {}) {
     return { type: types.GET_RESULTS_SUCCESS, results };
+}
+
+export function getInitialState() {
+    return { type: types.GET_INITIAL_SEARCH_STATE };
 }

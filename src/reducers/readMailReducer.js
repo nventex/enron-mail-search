@@ -1,6 +1,5 @@
 import * as types from "../actions/actionTypes";
-
-let defaultActionResult = { _source: { body: "" } };
+import * as initialState from "./initialState";
 
 export default function readMailReducer(state, action) {
     return handleAction(action);
@@ -12,6 +11,6 @@ function handleAction(action) {
             return action.mail;
         
         default:
-            return defaultActionResult;
+            return initialState.readMailState;
     }
 }

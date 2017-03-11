@@ -5,7 +5,7 @@ import { Grid, Row, Col } from "react-flexbox-grid";
 import RefreshIndicator from "material-ui/RefreshIndicator";
 import { Link } from "react-router";
 
-const SearchForm = ({query, errors, onQueryChange, onSearchClick, indicatorStatus}) => {
+const SearchForm = ({query, onQueryChange, onSearchClick, indicatorStatus}) => {
     const style = {
         refresh: {
             display: indicatorStatus === "loading" ? "inline-block" : "none",
@@ -46,7 +46,6 @@ const SearchForm = ({query, errors, onQueryChange, onSearchClick, indicatorStatu
 
 SearchForm.propTypes = {
     query: React.PropTypes.string.isRequired,
-    errors: React.PropTypes.object.isRequired,
     onQueryChange: React.PropTypes.func.isRequired,
     onSearchClick: React.PropTypes.func.isRequired,
     indicatorStatus: React.PropTypes.string.isRequired
