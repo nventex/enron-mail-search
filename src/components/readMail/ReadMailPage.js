@@ -27,8 +27,7 @@ class ReadMailPage extends React.Component {
     readMail() {
         this.toggleRefreshIndicator("loading");
         
-        let readData = Object.assign({}, this.props.location.state);
-        readData.email_id = this.props.params.id;        
+        let readData = Object.assign({email_id: this.props.params.id}, this.props.location.state);
 
         this.props.actions.readMail(readData).then(response => {
             this.toggleRefreshIndicator("hide");

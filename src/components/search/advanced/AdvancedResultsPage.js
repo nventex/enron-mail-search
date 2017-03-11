@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import AdvancedResultList from "./AdvancedResultList";
-import * as readActions from "../../../actions/readActions";
 import * as advancedSearchActions from "../../../actions/advancedSearchActions";
 import RefreshIndicator from "material-ui/RefreshIndicator";
 import { Grid, Row, Col } from "react-flexbox-grid";
@@ -26,16 +25,8 @@ class AdvancedResultsPage extends React.Component {
         }
         
         this.toggleRefreshIndicator("loading");
-        this.props.searchActions.search(this.props.location.state).then(response => {
+        this.props.actions.search(this.props.location.state).then(response => {
             this.toggleRefreshIndicator("hide");
-        });
-    }
-
-    onReadMailClick(id) {
-        let readItem = Object.assign({email_id: id}, this.props.searchState.searchCriteria);
-        
-        this.props.actions.readMail(readItem).then(response => {
-            this.context.router.push(`/mail/${id}`);
         });
     }
 
@@ -43,6 +34,15 @@ class AdvancedResultsPage extends React.Component {
         let state = Object.assign({}, this.state);
         state.indicatorStatus = status;
         this.setState(state);
+    }
+
+    onReadMailClick(id) {
+        let pushData = {
+            pathname: `/mail/${id}`,
+            state: this.props.searchState.criteria
+        }
+
+        this.context.router.push(pushData);
     }
 
     render() {
@@ -79,7 +79,6 @@ class AdvancedResultsPage extends React.Component {
 AdvancedResultsPage.propTypes =  {
     searchState: React.PropTypes.object.isRequired,
     actions: React.PropTypes.object.isRequired,
-    searchActions: React.PropTypes.object.isRequired,
     location: React.PropTypes.object.isRequired
 };
 
@@ -95,8 +94,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(readActions, dispatch),
-        searchActions: bindActionCreators(advancedSearchActions, dispatch)
+        actions: bindActionCreators(advancedSearchActions, dispatch)
     };
 }
 
