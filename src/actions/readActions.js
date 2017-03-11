@@ -4,7 +4,11 @@ import searchClient from "../api/SearchClient";
 // Called from a React component and returns a type for any reducer that cares about it...
 export function readMail(readItem) {
     return function(dispatch, getState) {
-        // searchClient.log(readItem);
+        
+        if (process.env.NODE_ENV === "production") {
+            searchClient.log(readItem);
+        }
+        
         return searchClient.readMail(readItem.email_id).then(response => {
             dispatch(getReadSuccess(response));
         }).catch(error => {

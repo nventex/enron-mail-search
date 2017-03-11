@@ -28,6 +28,7 @@ module.exports = {
         // Make sure this plugin is defined last...
         new webpack.DefinePlugin({
             "process.env": {
+                "NODE_ENV": JSON.stringify("development"),
                 "API_URL": JSON.stringify("http://localhost:3000/api")
             }
         })

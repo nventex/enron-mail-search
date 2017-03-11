@@ -10,11 +10,16 @@ class AdvancedSearchPage extends React.Component {
     constructor(props, context) {
         super(props, context);
 
-        let criteria = Object.assign({}, props.searchState.criteria);
+        /* 
+            Not sure why it throws this error when trying to set the initial state:
+                "A state mutation was detected between dispatches, 
+                in the path `advancedSearches.criteria.body_match`. This may cause incorrect behavior."
+            this.state = Object.assign({}, props.searchState);
 
+            just set the criteria as a workaround...
+        */
         this.state = {
-            indicatorStatus: "hide",
-            criteria
+            criteria: Object.assign({}, props.searchState.criteria)
         };
         
         this.onTextChange = this.onTextChange.bind(this);
