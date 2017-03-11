@@ -5,31 +5,14 @@ import RaisedButton from "material-ui/RaisedButton";
 import Subheader from "material-ui/Subheader";
 import { List, ListItem } from "material-ui/List";
 import DatePicker from "material-ui/DatePicker";
-import RefreshIndicator from "material-ui/RefreshIndicator";
 
-const AdvancedSearchForm = ({onTextChange, onSearchClick, criteria, onDateChange, indicatorStatus}) => {
-    const style = {
-        refresh: {
-            display: indicatorStatus === "loading" ? "inline-block" : "none",
-            position: "relative",
-        },
-    };
+const AdvancedSearchForm = ({onTextChange, onSearchClick, criteria, onDateChange}) => {
 
     let onDateChangeStart = (id, date) => onDateChange("startDate", date);
     let onDateChangeEnd = (id, date) => onDateChange("endDate", date);
 
     return (
             <Grid>
-                <Row center="lg">
-                    <Col>
-                        <RefreshIndicator
-                            size={40}
-                            left={0}
-                            top={0}
-                            status={indicatorStatus}
-                            style={style.refresh} />
-                    </Col>
-                </Row>                
                 <Row center="lg">
                     <Col>
                         <Subheader>Search e-mail body</Subheader>
@@ -144,8 +127,7 @@ AdvancedSearchForm.propTypes = {
     onTextChange: React.PropTypes.func.isRequired,
     onSearchClick: React.PropTypes.func.isRequired,
     onDateChange: React.PropTypes.func.isRequired,
-    criteria: React.PropTypes.object.isRequired,
-    indicatorStatus: React.PropTypes.string.isRequired
+    criteria: React.PropTypes.object.isRequired
 };
 
 export default AdvancedSearchForm;

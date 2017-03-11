@@ -10,14 +10,18 @@ export const searchState = {
 export const readMailState = { _source: { body: "" } };
 
 export const advancedSearchState = {
-    body_match: "", 
-    body_terms: "", 
-    body_phrase: "",
-    subject_match: "", 
-    subject_terms: "", 
-    subject_phrase: "",
-    from_filter: "", 
-    to_filter: "", 
-    startDate: null, 
-    endDate: null
+    hits: { hits: [] },
+    indicatorStatus: "hide",
+    criteria: {
+        body_match: "", 
+        body_terms: "", 
+        body_phrase: "",
+        subject_match: "", 
+        subject_terms: "", 
+        subject_phrase: "",
+        from_filter: "", 
+        to_filter: "", 
+        startDate: null, 
+        endDate: null        
+    }
 };

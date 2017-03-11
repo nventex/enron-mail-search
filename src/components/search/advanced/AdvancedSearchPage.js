@@ -10,30 +10,17 @@ class AdvancedSearchPage extends React.Component {
     constructor(props, context) {
         super(props, context);
 
-        let defaultCriteria = {
-            body_match: "", body_terms: "", body_phrase: "",
-            subject_match: "", subject_terms: "", subject_phrase: "",
-            from_filter: "", to_filter: "", startDate: null, endDate: null
-        };
-
-        if (this.props.searchState.searchCriteria) {
-            defaultCriteria = Object.assign({}, this.props.searchState.searchCriteria);
-        }
+        let criteria = Object.assign({}, props.searchState.criteria);
 
         this.state = {
             indicatorStatus: "hide",
-            criteria: defaultCriteria
+            criteria
         };
-
+        
         this.onTextChange = this.onTextChange.bind(this);
         this.onSearchClick = this.onSearchClick.bind(this);
         this.onDateChange = this.onDateChange.bind(this);
     }
-
-    componentWillReceiveProps(nextProps) {
-        let state = Object.assign({}, this.props.searchState);
-        this.setState(state);
-    }    
 
     onDateChange(id, date) {
         let state = Object.assign({}, this.state);
@@ -48,18 +35,12 @@ class AdvancedSearchPage extends React.Component {
     }
 
     onSearchClick() {
-        this.toggleRefreshIndicator("loading");
+        let pushData = {
+            pathname: "/advanced/search/1",
+            state: this.state.criteria
+        };
 
-        this.props.actions.search(this.state.criteria).then(response => {
-            this.toggleRefreshIndicator("hide");
-            this.context.router.push(`/advanced/search/1`);
-        });
-    }
-
-    toggleRefreshIndicator(status) {
-        let state = Object.assign({}, this.state);
-        state.indicatorStatus = status;
-        this.setState(state);
+        this.context.router.push(pushData);
     }
 
     render() {
@@ -69,7 +50,6 @@ class AdvancedSearchPage extends React.Component {
                 onSearchClick={this.onSearchClick}
                 criteria={this.state.criteria}
                 onDateChange={this.onDateChange}
-                indicatorStatus={this.state.indicatorStatus}
                 />
         );
     }
