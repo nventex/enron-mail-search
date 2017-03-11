@@ -11,18 +11,22 @@ class AdvancedResultsPage extends React.Component {
     constructor(props, context) {
         super(props, context);
 
-        this.state = {
-            pageNumber: 1
-        };
-
         this.onReadMailClick = this.onReadMailClick.bind(this);
     }
 
     componentDidMount() {
+        this.search();
+    }
+
+    search() {
+        if (!this.props.location.state) {
+            this.context.router.push("/advanced/search");
+        }
+        
         this.toggleRefreshIndicator("loading");
         this.props.searchActions.search(this.props.location.state).then(response => {
             this.toggleRefreshIndicator("hide");
-        });
+        });        
     }
 
     onReadMailClick(id) {
@@ -45,7 +49,7 @@ class AdvancedResultsPage extends React.Component {
                 display: this.state.indicatorStatus === "loading" ? "inline-block" : "none",
                 position: "relative",
             },
-        };        
+        };
         
         return (
             <div>

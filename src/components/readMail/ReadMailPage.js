@@ -5,10 +5,13 @@ import * as readActions from "../../actions/readActions";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import dateFormat from "dateformat";
 import FlatButton from "material-ui/FlatButton";
+import RefreshIndicator from "material-ui/RefreshIndicator";
 
 class ReadMailPage extends React.Component {
     constructor(props, context) {
         super(props, context);
+
+        this.state = Object.assign({}, props.readState);
 
         this.onBackClick = this.onBackClick.bind(this);
     }
@@ -22,17 +25,30 @@ class ReadMailPage extends React.Component {
     }
 
     readMail() {
-        // TODO: toggleRefreshIndicator("loading");
+        this.toggleRefreshIndicator("loading");
         
         let readData = Object.assign({}, this.props.location.state);
         readData.email_id = this.props.params.id;        
 
         this.props.actions.readMail(readData).then(response => {
-            // TODO: toggleRefreshIndicator("hide");
-        });        
+            this.toggleRefreshIndicator("hide");
+        });
+    }
+
+    toggleRefreshIndicator(status) {
+        let state = Object.assign({}, this.state);
+        state.indicatorStatus = status;
+        this.setState(state);
     }
 
     render() {
+        const style = {
+            refresh: {
+                display: this.state.indicatorStatus === "loading" ? "inline-block" : "none",
+                position: "relative",
+            },
+        };
+        
         return (
             <Grid>
                 <Row center="lg">
@@ -40,6 +56,16 @@ class ReadMailPage extends React.Component {
                         <FlatButton label="Back" onClick={this.onBackClick}/>
                     </Col>
                 </Row>
+                <Row center="lg">
+                    <Col>
+                        <RefreshIndicator
+                            size={40}
+                            left={0}
+                            top={0}
+                            status={this.state.indicatorStatus}
+                            style={style.refresh} />
+                    </Col>
+                </Row>                
                 <Row>
                     <Col lg={1}>
                         <b>Date:</b>

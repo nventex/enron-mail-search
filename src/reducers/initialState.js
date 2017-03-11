@@ -7,7 +7,12 @@ export const searchState = {
     pageNumber: 0
 };
 
-export const readMailState = { _source: { body: "" } };
+export const readMailState = { 
+    _source: { 
+        body: "" 
+    },
+    indicatorStatus: "hide"
+};
 
 export const advancedSearchState = {
     hits: { hits: [] },
