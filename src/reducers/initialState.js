@@ -4,7 +4,7 @@ export const searchState = {
     },
     indicatorStatus: "hide",
     query: "",
-    pageNumber: 1
+    pageNumber: 0
 };
 
 export const readMailState = { _source: { body: "" } };

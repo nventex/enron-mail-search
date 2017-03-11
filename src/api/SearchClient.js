@@ -38,12 +38,12 @@ class SearchClient {
             });
     }
     
-    static search(query, pageNumber = 1) {
+    static search(criteria) {
 
         const api = restful(`${apiUrl}/search`, fetchBackend(fetch));
 
-        template.params.query = query;
-        template.params.from = pageNumber - 1;
+        template.params.query = criteria.query;
+        template.params.from = criteria.pageNumber - 1;
 
         return api.post(template)
             .then((response) => {

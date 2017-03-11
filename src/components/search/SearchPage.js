@@ -21,6 +21,10 @@ class SearchPage extends React.Component {
         this.onBrowserButtonNavigation = this.onBrowserButtonNavigation.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.state = Object.assign({}, nextProps.searchState);
+    }
+
     componentDidMount() {
         // Handle cases when navigating back and forward...
         window.onpopstate = this.onBrowserButtonNavigation;
@@ -68,24 +72,16 @@ class SearchPage extends React.Component {
         this.search(query, pageNumber);
     }
 
-    setQueryUsingParams() {
-        let state = Object.assign({}, this.state);
-        state.query = this.props.params.query || "";
-        state.pageNumber = parseInt(this.props.params.pageNumber) || 1;
-        this.setState(state);
-    }
-
     search(query, pageNumber) {
         this.toggleRefreshIndicator("loading");
-        
-        const searchPromise = this.props.actions.search(query, pageNumber);
+        pageNumber = parseInt(pageNumber);
+
+        const searchPromise = this.props.actions.search({ query, pageNumber });
 
         searchPromise.then((response) => {
             this.toggleRefreshIndicator("hide");
             
             this.context.router.push(`/search/${query}/${pageNumber}`);
-
-            this.setQueryUsingParams();
         });
     }
 

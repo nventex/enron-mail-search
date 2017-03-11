@@ -22,13 +22,15 @@ class App extends React.Component {
                             <Col>
                             <FlatButton 
                                 label="Search"
-                                secondary={secondarySearch}
+                                disabled={secondarySearch}
+                                secondary={!secondarySearch}
                                 containerElement={<Link to="/search"/>}/>
                             </Col>
                             <Col>
                             <FlatButton 
                                 label="Advanced Search"
-                                secondary={secondaryAdvanced}
+                                disabled={secondaryAdvanced}
+                                secondary={!secondaryAdvanced}
                                 containerElement={<Link to="/advanced/search"/>}/>
                             </Col>                    
                         </Row>
