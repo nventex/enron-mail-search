@@ -12,6 +12,7 @@ class SearchPage extends React.Component {
     constructor(props, context) {
         super(props, context);
 
+        // Initialize state data using initialState.js
         this.state = Object.assign({}, props.searchState);
 
         this.onQueryChange = this.onQueryChange.bind(this);

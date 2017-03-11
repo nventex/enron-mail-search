@@ -11,6 +11,8 @@ class AdvancedResultsPage extends React.Component {
     constructor(props, context) {
         super(props, context);
 
+        this.state = Object.assign({}, props.searchState);
+
         this.onReadMailClick = this.onReadMailClick.bind(this);
     }
 
@@ -26,7 +28,7 @@ class AdvancedResultsPage extends React.Component {
         this.toggleRefreshIndicator("loading");
         this.props.searchActions.search(this.props.location.state).then(response => {
             this.toggleRefreshIndicator("hide");
-        });        
+        });
     }
 
     onReadMailClick(id) {
