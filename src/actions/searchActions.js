@@ -5,8 +5,7 @@ import searchClient from "../api/SearchClient";
 export function search(query, pageNumber) {
     return function(dispatch, getState) {
         return searchClient.search(query, pageNumber).then(response => {
-            let state = getState();
-            dispatch(getResultsSuccess({ hits: response.hits }));
+            dispatch(getResultsSuccess(response));
         }).catch(error => {
             throw(error);
         });
@@ -15,8 +14,8 @@ export function search(query, pageNumber) {
 
 // Find the reducer that uses the "type=GET_RESULTS_SUCCESS""
 // It's returning an action type and the data...
-export function getResultsSuccess(results = {}) {
-    return { type: types.GET_RESULTS_SUCCESS, results };
+export function getResultsSuccess(response) {
+    return { type: types.GET_RESULTS_SUCCESS, response };
 }
 
 export function getInitialState() {

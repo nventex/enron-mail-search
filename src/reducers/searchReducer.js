@@ -12,7 +12,7 @@ export default function searchReducer(state, action) {
 function handleAction(action) {
     switch (action.type) {
         case types.GET_RESULTS_SUCCESS:
-            return action.results;
+            return Object.assign({}, action.response);
 
         case types.GET_INITIAL_SEARCH_STATE:
         default:
