@@ -10,10 +10,6 @@ function handleAction(state, action) {
         case types.GET_ADVANCED_RESULTS_SUCCESS:
             return getAdvancedResultsSuccess(state, action);
 
-        // Needs to be recycled back to the AdvancedSearchPage in case user navigates back..
-        case types.READ_MAIL_SUCCESS:
-            return action.mail.advancedSearchResults;
-
         default:
             return initialState.advancedSearchState;
     }
