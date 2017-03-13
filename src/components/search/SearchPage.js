@@ -22,16 +22,16 @@ class SearchPage extends React.Component {
         this.onBrowserButtonNavigation = this.onBrowserButtonNavigation.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.state = Object.assign({}, nextProps.searchState);
-    }
-
     componentDidMount() {
         // Handle cases when navigating back and forward...
         window.onpopstate = this.onBrowserButtonNavigation;
 
         // Handle cases when a search result is directly accessed (ie: bookmarked)...
         this.onPageLoadAndButtonNavigation();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.state = Object.assign({}, nextProps.searchState);
     }
 
     onBrowserButtonNavigation(event) {

@@ -40,7 +40,7 @@ class AdvancedResultsPage extends React.Component {
         let pushData = {
             pathname: `/mail/${id}`,
             state: this.props.searchState.criteria
-        }
+        };
 
         this.context.router.push(pushData);
     }
