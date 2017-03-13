@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server -d --inline",
     "prod": "webpack --config webpack-production.config.js -p",
+    "test": "tape src/**/*.test.js --watch",
     "start": "node server.js"
   },
   "engines": {

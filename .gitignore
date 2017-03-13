@@ -1,3 +1,5 @@
 /node_modules/
 
 /docs/elastic-*.md
+
+npm-debug.log
