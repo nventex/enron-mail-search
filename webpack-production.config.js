@@ -2,6 +2,8 @@ var webpackStrip = require("strip-loader");
 var config = require("./webpack.config.js");
 var webpack = require("webpack");
 
+config.watch = false;
+
 var stripLoader = {
     test: [/\.js$/, /\.es6$/],
     exlude: /node_modules/,
@@ -16,7 +18,9 @@ var productionPlugin =
         }
     });
 
-var uglifyPlugin = new webpack.optimize.UglifyJsPlugin();
+var uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
+    compress: { warnings: false }
+});
 
 config.module.loaders.push(stripLoader);
 config.plugins.pop();
