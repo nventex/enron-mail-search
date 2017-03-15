@@ -1,19 +1,19 @@
 {
   "name": "enron-mail-search",
   "version": "1.0.0",
-  "description": "",
+  "description": "Enron mail search.",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server -d --inline",
     "prod": "webpack --config webpack-production.config.js -p",
-    "test": "tape src/**/*.test.js --watch",
+    "test": "tape -r babel-register src/**/*.test.js",
     "start": "node server.js"
   },
   "engines": {
     "node": "6.9.2",
     "npm": "4.0.5"
   },
-  "author": "",
+  "author": "Nventex",
   "license": "ISC",
   "dependencies": {
     "babel-cli": "^6.22.2",
@@ -29,6 +29,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
     "dateformat": "^2.0.0",
+    "enzyme": "^2.7.1",
     "eslint": "^3.14.0",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-import": "^2.2.0",
@@ -59,7 +60,6 @@
     "rimraf": "^2.5.4",
     "strip-loader": "^0.1.2",
     "style-loader": "^0.13.1",
-    "tape": "^4.6.3",
     "toastr": "^2.1.2",
     "url-loader": "^0.5.7",
     "webpack": "^1.14.0"

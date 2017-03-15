@@ -1,3 +1,6 @@
-import React from "react";
-import SearchForm from "./SearchForm";
+import test from "tape";
 
+test('successful test', (t) => {
+  t.equal(1,21);
+  t.end();
+});
