@@ -19,7 +19,7 @@ const ResultList = ({results, onPaginateClick, pageNumber, totalCount, onReadMai
 
     return (
         <Grid>
-            <Row center="lg" style={{ display: hasResults }}>
+            <Row center="lg" style={{ display: hasResults }} id="count-header">
                 <Col>
                     <Subheader>{totalCount} hits</Subheader>
                 </Col>
@@ -33,6 +33,7 @@ const ResultList = ({results, onPaginateClick, pageNumber, totalCount, onReadMai
                 <Col lg={3} />
                 <Col lg={6}>
                     <ReactPaginate
+                        id="paginate-controls"
                         previousLabel={"<"}
                         nextLabel={">"}
                         breakLabel={".."}

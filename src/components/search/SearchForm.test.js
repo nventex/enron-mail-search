@@ -1,6 +1,5 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
-import TestUtils from "react-addons-test-utils";
+import { shallow } from "enzyme";
 import SearchForm from "./SearchForm";
 import test from "tape";
 
@@ -39,13 +38,13 @@ test("Set the status of the RefreshIndicator", (assert) => {
   assert.end();
 });
 
-test("Set the RefreshIndicator to inline-block", (assert) => {
+test("Display the RefreshIndicator", (assert) => {
   const wrapper = setup("query", "loading");
   assert.equal(wrapper.find("RefreshIndicator").props().style.display, "inline-block");
   assert.end();
 });
 
-test("Set the RefreshIndicator to inline-block", (assert) => {
+test("Hide the refresh indicator", (assert) => {
   const wrapper = setup("query", "hide");
   assert.equal(wrapper.find("RefreshIndicator").props().style.display, "none");
   assert.end();
