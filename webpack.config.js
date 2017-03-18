@@ -7,7 +7,6 @@ module.exports = {
     entry: [
         path.resolve(__dirname, "src/index")
     ],
-    target: "web",
     watch: true,
     output: {
         path: path.join(__dirname, "dist"), //Production builds put files here...
@@ -34,22 +33,16 @@ module.exports = {
         })
     ],
     module: {
-        preLoaders: [
-            { 
-                test: /\.js$/, 
-                exclude: /node_modules/,
-                loader: "eslint-loader"
-            }
-        ],
-        loaders: [
-            { test: /\.js$/, include: path.join(__dirname, "src"), loaders: ["babel"] },
-            { test: /\.css$/, loaders: ["style", "css"], exclude: /flexboxgrid/ },
-            { test: /\.css$/, loader: "style!css?modules", include: /flexboxgrid/ },
-            { test: /\.less$/, loaders: ["style", "css", "less"] },
-            { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
-            { test: /\.(woff|woff2|png)$/, loader: "url?prefix=font/&limit=5000" },
-            { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
-            { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml" }
+        rules: [
+            { test: /\.js$/, exclude: /node_modules/, use: "eslint-loader", enforce: "pre" },
+            { test: /\.js$/, include: path.join(__dirname, "src"), use: ["babel-loader"] },
+            { test: /\.css$/, use: ["style-loader", "css-loader"], exclude: /flexboxgrid/ },
+            { test: /\.css$/, use: ["style-loader", "css-loader?modules"], include: /flexboxgrid/ },
+            { test: /\.less$/, use: ["style-loader", "css-loader", "less-loader"] },
+            { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, use: "file-loader" },
+            { test: /\.(woff|woff2|png)$/, use: "url-loader?prefix=font/&limit=5000" },
+            { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, use: "url-loader?limit=10000&mimetype=application/octet-stream" },
+            { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, use: "url-loader?limit=10000&mimetype=image/svg+xml" }
         ]
     }
 };

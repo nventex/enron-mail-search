@@ -6,7 +6,7 @@ config.watch = false;
 
 var stripLoader = {
     test: [/\.js$/, /\.es6$/],
-    exlude: /node_modules/,
+    exclude: /node_modules/,
     loader: webpackStrip.loader("console.log")
 };
 
@@ -18,13 +18,8 @@ var productionPlugin =
         }
     });
 
-var uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
-    compress: { warnings: false }
-});
-
-config.module.loaders.push(stripLoader);
+config.module.rules.push(stripLoader);
 config.plugins.pop();
 config.plugins.push(productionPlugin);
-config.plugins.push(uglifyPlugin);
 
 module.exports = config;
