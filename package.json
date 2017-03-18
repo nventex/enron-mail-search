@@ -4,15 +4,17 @@
   "description": "Enron mail search.",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server -d --inline",
-    "prod": "webpack --config webpack-production.config.js -p --progress",
+    "dev": "npm-run-all --parallel watch build:dev",
+    "build:dev": "webpack-dev-server -d --inline",
+    "prod": "npm-run-all --parallel test build:prod",
+    "build:prod": "webpack --config webpack-production.config.js -p --progress",
     "test": "tape -r babel-register -r ignore-styles src/**/*.test.js | faucet",
     "watch": "npm-watch",
     "start": "node server.js",
     "postinstall": "npm run prod"
   },
   "watch": {
-    "test": "src/**/*.test.js"
+    "test": "src/**/*.js"
   },
   "engines": {
     "node": "6.9.2",
@@ -50,7 +52,7 @@
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
     "material-ui": "^0.16.7",
-    "npm-run-all": "^4.0.1",
+    "npm-run-all": "^4.0.2",
     "npm-watch": "^0.1.8",
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",

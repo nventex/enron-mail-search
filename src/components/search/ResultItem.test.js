@@ -18,7 +18,8 @@ function setup() {
                     "snippet 2"
                 ]
             }
-        }
+        },
+        onReadMailClick: () => {}
     }
 
     return shallow(<ResultItem {...props}/>);
