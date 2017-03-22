@@ -2,13 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as searchActions from "../../actions/searchActions";
-import * as readActions from "../../actions/readActions";
 import SearchForm from "./SearchForm";
 import ResultList from "./ResultList";
 
 // Container component...
 
-class SearchPage extends React.Component {
+export class SearchPage extends React.Component {
     constructor(props, context) {
         super(props, context);
 
