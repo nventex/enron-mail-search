@@ -11,7 +11,7 @@
     "test": "tape -r babel-register -r ignore-styles src/tools/testSetup.js src/**/*.test.js | faucet",
     "watch": "npm-watch",
     "start": "node server.js",
-    "postinstall": "npm run prod"
+    "postinstall": "npm run prod "
   },
   "watch": {
     "test": "src/**/*.js"
