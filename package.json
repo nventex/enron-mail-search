@@ -8,7 +8,7 @@
     "build:dev": "webpack-dev-server -d --inline",
     "prod": "npm-run-all --parallel test build:prod",
     "build:prod": "webpack --config webpack-production.config.js -p --progress",
-    "test": "tape -r babel-register -r ignore-styles src/**/*.test.js | faucet",
+    "test": "tape -r babel-register -r ignore-styles src/tools/testSetup.js src/**/*.test.js | faucet",
     "watch": "npm-watch",
     "start": "node server.js",
     "postinstall": "npm run prod"
