@@ -1,4 +1,5 @@
 {
+  "_comments": "leaving testSetup.js there for now until I figure out how to do mount test on SearchPage.",
   "name": "enron-mail-search",
   "version": "1.0.0",
   "description": "Enron mail search.",
