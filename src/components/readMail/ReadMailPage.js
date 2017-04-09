@@ -50,12 +50,12 @@ class ReadMailPage extends React.Component {
         
         return (
             <Grid>
-                <Row center="lg">
+                <Row center="xs">
                     <Col>
                         <FlatButton label="Back" onClick={this.onBackClick}/>
                     </Col>
                 </Row>
-                <Row center="lg">
+                <Row center="xs">
                     <Col>
                         <RefreshIndicator
                             size={40}
@@ -66,34 +66,34 @@ class ReadMailPage extends React.Component {
                     </Col>
                 </Row>                
                 <Row>
-                    <Col lg={1}>
+                    <Col xs={1}>
                         <b>Date:</b>
                     </Col>
-                    <Col lg={5}>
+                    <Col xs={5}>
                         {dateFormat(this.props.readState._source.date, "mm/dd/yyyy h:M TT")}
                     </Col>
                 </Row>
                 <Row>
-                    <Col lg={1}>
+                    <Col xs={1}>
                         <b>From:</b>
                     </Col>
-                    <Col lg={5}>
+                    <Col xs={5}>
                         {this.props.readState._source.from}
                     </Col>
                 </Row>
                 <Row>
-                    <Col lg={1}>
+                    <Col xs={1}>
                         <b>To:</b>
                     </Col>
-                    <Col lg={5}>
+                    <Col xs={5}>
                         {this.props.readState._source.to}
                     </Col>
                 </Row>
                 <Row>
-                    <Col lg={1}>
+                    <Col xs={1}>
                         <b>Subject:</b>
                     </Col>
-                    <Col lg={5}>
+                    <Col xs={5}>
                         {this.props.readState._source.subject}
                     </Col>
                 </Row>

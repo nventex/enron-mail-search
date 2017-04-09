@@ -19,7 +19,7 @@ const ResultList = ({results, onPaginateClick, pageNumber, totalCount, onReadMai
 
     return (
         <Grid>
-            <Row center="lg" style={{ display: hasResults }} id="count-header">
+            <Row center="xs" style={{ display: hasResults }} id="count-header">
                 <Col>
                     <Subheader>{totalCount} hits</Subheader>
                 </Col>
@@ -29,9 +29,9 @@ const ResultList = ({results, onPaginateClick, pageNumber, totalCount, onReadMai
                     <div>{resultRows}</div>
                 </Col>
             </Row>
-            <Row center="lg" style={{ display: hasResults }}>
-                <Col lg={3} />
-                <Col lg={6}>
+            <Row center="xs" style={{ display: hasResults }}>
+                <Col xs={3} />
+                <Col xs={6}>
                     <ReactPaginate
                         id="paginate-controls"
                         previousLabel={"<"}
@@ -45,7 +45,7 @@ const ResultList = ({results, onPaginateClick, pageNumber, totalCount, onReadMai
                         containerClassName={"pagination"}
                         activeClassName={"active"} />
                 </Col>
-                <Col lg={3} />
+                <Col xs={3} />
             </Row>
         </Grid>
     );

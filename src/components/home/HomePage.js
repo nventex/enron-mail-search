@@ -22,14 +22,14 @@ class HomePage extends React.Component {
         return (
             <div>
             <Grid>
-                <Row center="lg">
-                    <Col lg={12}>
+                <Row center="xs">
+                    <Col xs={12}>
                         {this.state.date}<br/>
                         {this.state.text}
                     </Col>
                 </Row>
                 <Row>
-                    <Col lg={12}>
+                    <Col xs={12}>
                           <Slider 
                             onChange={this.onSliderChange}
                             step={1} 
@@ -37,8 +37,8 @@ class HomePage extends React.Component {
                             value={0} />
                     </Col>
                 </Row>
-                <Row center="lg">
-                    <Col lg={12}>
+                <Row center="xs">
+                    <Col xs={12}>
                         <img src={require('../../assets/images/EnronMagnified.png')}/>
                     </Col>
                 </Row>

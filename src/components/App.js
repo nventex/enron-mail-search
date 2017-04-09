@@ -18,7 +18,7 @@ class App extends React.Component {
                 <div>
                     <Header/>
                     <Grid>
-                        <Row center="lg">
+                        <Row center="xs">
                             <Col>
                             <FlatButton 
                                 label="Search"

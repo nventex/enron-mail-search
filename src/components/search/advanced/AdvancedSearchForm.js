@@ -13,7 +13,7 @@ const AdvancedSearchForm = ({onTextChange, onSearchClick, criteria, onDateChange
 
     return (
             <Grid>
-                <Row center="lg">
+                <Row center="xs">
                     <Col>
                         <Subheader>Search e-mail body</Subheader>
                         <List>
@@ -67,12 +67,12 @@ const AdvancedSearchForm = ({onTextChange, onSearchClick, criteria, onDateChange
                         </List>
                     </Col>
                 </Row>
-                <Row center="lg">
+                <Row center="xs">
                     <Col>
                         <Subheader>Narrow your search</Subheader>
                     </Col>
                 </Row>
-                <Row center="lg">
+                <Row center="xs">
                     <Col>
                         <List>
                             <ListItem>
@@ -112,7 +112,7 @@ const AdvancedSearchForm = ({onTextChange, onSearchClick, criteria, onDateChange
                         </List>
                     </Col>
                 </Row>
-                <Row center="lg">
+                <Row center="xs">
                     <Col>
                         <RaisedButton
                             label="Search"

@@ -16,7 +16,7 @@ const SearchForm = ({query, onQueryChange, onSearchClick, indicatorStatus}) => {
     return (
         <form onSubmit={onSearchClick}>
             <Grid>
-                <Row center="lg">
+                <Row center="xs">
                     <Col>
                         <TextField
                             id="text-field-query"
@@ -29,7 +29,7 @@ const SearchForm = ({query, onQueryChange, onSearchClick, indicatorStatus}) => {
                             onClick={onSearchClick} />
                     </Col>
                 </Row>
-                <Row center="lg">
+                <Row center="xs">
                     <Col>
                         <RefreshIndicator
                             size={40}
